@@ -8,18 +8,21 @@ from models import ErrorLog
 
 
 def tencent():
-    if not QQMsg.table_exists():
-        QQMsg.create_table()
-    else:
-        QQMsg.drop_table()
-        QQMsg.create_table()
+    # for test purpose
+    # if not QQMsg.table_exists():
+    #     QQMsg.create_table()
+    # else:
+    #     QQMsg.drop_table()
+    #     QQMsg.create_table()
     print "Please input the QQ txt msg src:"
-    file_src = raw_input()
+    file_src = "c:\\1.txt"
     read_and_store_tencent(file_src)
 
 
 def read_and_store_tencent(txt_file):
     f = open(txt_file, mode='r')
+    # start from where last end
+    f.seek(3966 * 1024)
     line_id = None
     line_number = 0
     for current_line in f:
@@ -34,6 +37,9 @@ def read_and_store_tencent(txt_file):
             pattern = re.compile(r"^\d{4}(-\d\d){2} \d\d(:\d\d){2}")
             if pattern.match(current_line):
                 line_date, line_time, line_user = current_line.split(" ")[0:3]
+                if QQMsg.filter(msg_date=line_date, msg_time=line_date + " " + line_time, msg_user=line_user).exists():
+                    # "already there"
+                    continue
                 new_msg = QQMsg(msg_date=line_date, msg_time=line_date + " " + line_time, msg_user=line_user)
                 new_msg.save()
                 line_id = new_msg.get_id()
@@ -51,13 +57,14 @@ def read_and_store_tencent(txt_file):
 
 
 def short_message():
-    if not Sms.table_exists():
-        Sms.create_table()
-    else:
-        Sms.drop_table()
-        Sms.create_table()
+    # for test purpose
+    # if not Sms.table_exists():
+    #     Sms.create_table()
+    # else:
+    #     Sms.drop_table()
+    #     Sms.create_table()
     print "Please input the sms file src:"
-    file_src = raw_input()
+    file_src = "c:\\2.txt"
     read_and_store_sms(file_src)
 
 
@@ -116,5 +123,5 @@ def deal_with_sms_date_time(date_time):
 
 
 if __name__ == '__main__':
-    # tencent()
-    short_message()
+    tencent()
+    # short_message()
