@@ -4,25 +4,26 @@ from smtplib import SMTP
 from poplib import POP3
 from time import sleep
 
-SMTPSVR = 'smtp.python.is.cool'
-POP3SVR = 'pop.python.is.cool'
+SMTPSVR = 'smtp.163.com'
+POP3SVR = 'pop.163.com'
 
-origHdrs = ['From: wesley@python.is.cool',
-    'To: wesley@python.is.cool',
+origHdrs = ['From: hospital_test@163.com',
+    'To: hospital_test@163.com',
     'Subject: test msg']
 origBody = ['xxx', 'yyy', 'zzz']
 origMsg = '\r\n\r\n'.join(['\r\n'.join(origHdrs), '\r\n'.join(origBody)])
 
 sendSvr = SMTP(SMTPSVR)
-errs = sendSvr.sendmail('wesley@python.is.cool',
-    ('wesley@python.is.cool', ), origMsg)
+sendSvr.login("hospital_test@163.com", "tt111111")
+errs = sendSvr.sendmail('hospital_test@163.com',
+    ('hospital_test@163.com', ), origMsg)
 sendSvr.quit()
 assert len(errs) == 0, errs
 sleep(10)    # wait for mail to be delivered
 
 recvSvr = POP3(POP3SVR)
-recvSvr.user('wesley')
-recvSvr.pass_('youllNeverGuess')
+recvSvr.user('hospital_test@163.com')
+recvSvr.pass_('tt111111')
 rsp, msg, siz = recvSvr.retr(recvSvr.stat()[0])
 # strip headers and compare to orig msg
 sep = msg.index('')
