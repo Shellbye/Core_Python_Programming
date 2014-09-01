@@ -8,13 +8,20 @@ def key_to_java_def(key_string):
         print "private String %s;" % key
 
 
+def position_parameter_to_key_value(params):
+    param = params.split(",")
+    ret_param = ""
+    for p in param:
+        p = p.strip()
+        # print p + "=" + p
+        ret_param += p + "=" + "''" + ", "
+    print ret_param
+    pass
+
+
 if __name__ == "__main__":
     key_string = '''
-school
-start_time
-end_time
-train_content
-achieve
-
+merchantaccount, orderid, orderexpdate, transtime, currency, amount, productcatalog,userua, productname, productdesc,
+userip, identityid, identitytype, terminalid, terminaltype, other, callbackurl, fcallbackurl, paytypes
     '''
-    key_to_java_def(key_string)
+    position_parameter_to_key_value(key_string)
