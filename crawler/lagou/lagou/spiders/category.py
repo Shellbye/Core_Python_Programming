@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import scrapy
+from ..items import CategoryItem
 
 
 class CategorySpider(scrapy.Spider):
@@ -11,4 +12,7 @@ class CategorySpider(scrapy.Spider):
 
     def parse(self, response):
         for a in response.css(".menu_box .menu_main h2"):
-            print a.extract()
+            item = CategoryItem()
+            item['category'] = a.extract()
+            return item
+            # print a.extract()

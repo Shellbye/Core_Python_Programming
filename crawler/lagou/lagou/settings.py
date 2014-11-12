@@ -15,3 +15,10 @@ NEWSPIDER_MODULE = 'lagou.spiders'
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 #USER_AGENT = 'lagou (+http://www.yourdomain.com)'
+ITEM_PIPELINES = [
+  'scrapy_mongodb.MongoDBPipeline',
+]
+
+MONGODB_URI = 'mongodb://localhost:27017'
+MONGODB_DATABASE = 'scrapy'
+MONGODB_COLLECTION = 'lagou'

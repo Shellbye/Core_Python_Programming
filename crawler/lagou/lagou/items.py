@@ -14,3 +14,15 @@ class LagouItem(scrapy.Item):
     sub_category = scrapy.Field()
     keywords = scrapy.Field()
     jd = scrapy.Field()
+
+
+class CategoryItem(scrapy.Item):
+    category = scrapy.Field()
+
+
+class SubCategoryItem(scrapy.Item):
+    sub_category = scrapy.Field()
+
+
+class KeywordsItem(scrapy.Item):
+    keywords = scrapy.Field()
