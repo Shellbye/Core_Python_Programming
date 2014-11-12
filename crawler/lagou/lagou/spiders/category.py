@@ -11,8 +11,10 @@ class CategorySpider(scrapy.Spider):
     )
 
     def parse(self, response):
+        item_list = []
         for a in response.css(".menu_box .menu_main h2"):
             item = CategoryItem()
             item['category'] = a.extract()
-            return item
+            item_list.append(item)
             # print a.extract()
+        return item_list
