@@ -1,0 +1,9 @@
+pagination
+    http://www.lagou.com/jobs/list_Python?kd=Python&spc=1&pl=&gj=&xl=&yx=&gx=&st=&labelWords=label%2Clabel&lc=&workAddress=&city=%E5%85%A8%E5%9B%BD&requestId=&pn=29
+    http://www.lagou.com/jobs/list_Java?kd=Java&spc=1&pl=&gj=&xl=&yx=&gx=&st=&labelWords=label%2Clabel&lc=&workAddress=&city=%E5%85%A8%E5%9B%BD&requestId=&pn=1
+    last one parameter is the page number
+
+page type
+    1.index     http://www.lagou.com/
+    2.list      see pagination
+    3.detail    http://www.lagou.com/jobs/115600.html?source=search
