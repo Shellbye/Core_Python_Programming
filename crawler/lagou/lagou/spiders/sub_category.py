@@ -19,7 +19,6 @@ class SubCategorySpider(scrapy.Spider):
             c = re.sub('\r\n', '', c)
             c = re.sub('\t', '', c)
             c = re.sub(' ', '', c)
-            print c
             # 因为上面去掉了所有的空格，所以这里的a标签直接和href属性连在了一起
             m = re.search("""<ahref="(.+?)">(.+?)</a>""", c)
             if m:
