@@ -14,6 +14,8 @@ class LagouItem(scrapy.Item):
     sub_category = scrapy.Field()
     keywords = scrapy.Field()
     keywords_link = scrapy.Field()
+    job_link = scrapy.Field()
+    job_name = scrapy.Field()
     jd = scrapy.Field()
 
 

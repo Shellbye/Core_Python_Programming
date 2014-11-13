@@ -2,6 +2,7 @@
 import re
 
 import scrapy
+from scrapy.http import Request
 
 from ..items import LagouItem
 
@@ -14,7 +15,7 @@ class JdSpider(scrapy.Spider):
     )
 
     def parse(self, response):
-        item_list = []
+        # item_list = []
         for category_selector in response.css(".mainNavs .menu_box"):
             category = category_selector.css(".menu_main h2").extract()[0]
             m = re.search("<h2>(.+?)<span></span></h2>", category)
@@ -40,18 +41,53 @@ class JdSpider(scrapy.Spider):
                                 current_keywords = m.group(2).strip()
                                 current_keywords_link = m.group(1).strip()
                                 # print current_keywords
-                                item = LagouItem()
-                                item['category'] = current_category_text
-                                item['sub_category'] = current_sub_category_text
-                                item['keywords'] = current_keywords
-                                item['keywords_link'] = current_keywords_link
-                                item_list.append(item)
-
-                                # todo
+                                # item = LagouItem()
+                                # item['category'] = current_category_text
+                                # item['sub_category'] = current_sub_category_text
+                                # item['keywords'] = current_keywords
+                                # item['keywords_link'] = current_keywords_link
+                                # item_list.append(item)
+                                yield Request(current_keywords_link,
+                                              meta={
+                                                  'category': current_category_text,
+                                                  'sub_category': current_sub_category_text,
+                                                  'keywords': current_keywords,
+                                                  'keywords_link': current_keywords_link
+                                              },
+                                              callback=self.parse_2)
                             else:
                                 continue
                     else:
                         continue
             else:
                 continue
-        return item_list
+
+    def parse_2(self, response):
+        for job_selector in response.css(".hot_pos .clearfix .hot_pos_l .mb10 a"):
+            j = job_selector.extract()
+            m = re.search("""<a href="(.+?)">(.+?)</a>""", j)
+            if m:
+                job_link = m.group(1).strip()
+                job_name = m.group(2).strip()
+                response.meta.update({
+                    'job_link': job_link,
+                    'job_name': job_name,
+                }),
+                yield Request(job_link,
+                              meta=response.meta,
+                              callback=self.parse_3)
+            else:
+                continue
+
+    def parse_3(self, response):
+        job_info = response.css(".job_bt")[0]
+        jd = job_info.extract()
+        item = LagouItem()
+        item['category'] = response.meta['category']
+        item['sub_category'] = response.meta['sub_category']
+        item['keywords'] = response.meta['keywords']
+        item['keywords_link'] = response.meta['keywords_link']
+        item['job_link'] = response.meta['job_link']
+        item['job_name'] = response.meta['job_name']
+        item['jd'] = jd
+        return item
