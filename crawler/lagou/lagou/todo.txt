@@ -16,3 +16,9 @@ page structure
         sub-category:   class="menu_sub" class="reset" dt a
         keywords:       class="menu_sub" class="reset" dd a
         list:           class="clearfix" class="hot_pos_l" class="mb10" a
+
+page type
+    1.http://www.lagou.com/
+    2.http://www.lagou.com/zhaopin/jingzhuntuijian?labelWords=label
+      http://www.lagou.com/jobs/list_%s?kd=%s&spc=1&pl=&gj=&xl=&yx=&gx=&st=&labelWords=label%2Clabel&lc=&workAddress=&city=全国&requestId=&pn=%s % keyword,keyword,page
+    3.http://www.lagou.com/jobs/304013.html?source=search
