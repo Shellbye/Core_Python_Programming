@@ -1,9 +1,18 @@
 pagination
-    http://www.lagou.com/jobs/list_Python?kd=Python&spc=1&pl=&gj=&xl=&yx=&gx=&st=&labelWords=label%2Clabel&lc=&workAddress=&city=%E5%85%A8%E5%9B%BD&requestId=&pn=29
-    http://www.lagou.com/jobs/list_Java?kd=Java&spc=1&pl=&gj=&xl=&yx=&gx=&st=&labelWords=label%2Clabel&lc=&workAddress=&city=%E5%85%A8%E5%9B%BD&requestId=&pn=1
+    http://www.lagou.com/jobs/list_Python?kd=Python&spc=1&pl=&gj=&xl=&yx=&gx=&st=&labelWords=label%2Clabel&lc=&workAddress=&city=全国&requestId=&pn=29
+    http://www.lagou.com/jobs/list_Java?kd=Java&spc=1&pl=&gj=&xl=&yx=&gx=&st=&labelWords=label%2Clabel&lc=&workAddress=&city=全国&requestId=&pn=1
+    http://www.lagou.com/jobs/list_项目经理?kd=项目经理&spc=1&pl=&gj=&xl=&yx=&gx=&st=&labelWords=label%2Clabel&lc=&workAddress=&city=全国&requestId=&pn=4
     last one parameter is the page number
+    http://www.lagou.com/jobs/list_%s?kd=%s&spc=1&pl=&gj=&xl=&yx=&gx=&st=&labelWords=label%2Clabel&lc=&workAddress=&city=全国&requestId=&pn=%s % keyword,keyword,page
 
 page type
     1.index     http://www.lagou.com/
     2.list      see pagination
     3.detail    http://www.lagou.com/jobs/115600.html?source=search
+
+page structure
+    class="menu_box"
+        category:       class="menu_main" h2
+        sub-category:   class="menu_sub" class="reset" dt a
+        keywords:       class="menu_sub" class="reset" dd a
+        list:           class="clearfix" class="hot_pos_l" class="mb10" a
