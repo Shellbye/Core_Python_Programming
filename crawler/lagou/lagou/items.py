@@ -21,7 +21,8 @@ class CategoryItem(scrapy.Item):
 
 
 class SubCategoryItem(scrapy.Item):
-    sub_category = scrapy.Field()
+    link = scrapy.Field()
+    text = scrapy.Field()
 
 
 class KeywordsItem(scrapy.Item):
