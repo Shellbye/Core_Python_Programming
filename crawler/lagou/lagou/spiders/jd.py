@@ -38,12 +38,15 @@ class JdSpider(scrapy.Spider):
                             m = re.search("""<a href="(.+?)">(.+?)</a>""", k)
                             if m:
                                 current_keywords = m.group(2).strip()
+                                current_keywords_link = m.group(1).strip()
                                 # print current_keywords
                                 item = LagouItem()
                                 item['category'] = current_category_text
                                 item['sub_category'] = current_sub_category_text
                                 item['keywords'] = current_keywords
+                                item['keywords_link'] = current_keywords_link
                                 item_list.append(item)
+
                                 # todo
                             else:
                                 continue
