@@ -13,6 +13,7 @@ class LagouItem(scrapy.Item):
     category = scrapy.Field()
     sub_category = scrapy.Field()
     keywords = scrapy.Field()
+    keywords_link = scrapy.Field()
     jd = scrapy.Field()
 
 
