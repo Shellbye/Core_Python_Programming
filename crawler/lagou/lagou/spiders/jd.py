@@ -3,6 +3,7 @@ import re
 
 import scrapy
 from scrapy.http import Request
+from scrapy import log
 
 from ..items import LagouItem
 
@@ -49,7 +50,8 @@ class JdSpider(scrapy.Spider):
                                                       'category': current_category_text,
                                                       'sub_category': current_sub_category_text,
                                                       'keywords': current_keywords,
-                                                      'keywords_link': current_keywords_link
+                                                      'keywords_link': current_keywords_link,
+                                                      'current_page': str(page),
                                                   },
                                                   callback=self.parse_2)
                             else:
@@ -60,6 +62,14 @@ class JdSpider(scrapy.Spider):
                 continue
 
     def parse_2(self, response):
+        # 更多页码已没有结果
+        if response.css(".noresult"):
+            log.msg(response.meta['category'] + "\t"
+                    + response.meta['sub_category'] + "\t"
+                    + response.meta['keywords'] + "\t no more page \t since "
+                    + response.meta['current_page'],
+                    level=log.ERROR)
+            return
         for job_selector in response.css(".hot_pos .clearfix .hot_pos_l .mb10 a"):
             j = job_selector.extract()
             m = re.search("""<a href="(.+?)">(.+?)</a>""", j)
