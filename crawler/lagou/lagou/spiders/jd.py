@@ -87,8 +87,14 @@ class JdSpider(scrapy.Spider):
                 continue
 
     def parse_3(self, response):
-        job_info = response.css(".job_bt")[0]
-        jd = job_info.extract()
+        job_info = response.css(".job_bt")
+        if not job_info:
+            log.msg("JOB "
+                    + response.meta['job_name'] + " no longer exits, the link is "
+                    + response.meta['job_link'],
+                    level=log.CRITICAL)
+            return
+        jd = job_info[0].extract()
         item = LagouItem()
         item['category'] = response.meta['category']
         item['sub_category'] = response.meta['sub_category']
