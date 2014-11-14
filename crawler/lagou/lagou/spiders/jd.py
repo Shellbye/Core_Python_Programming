@@ -15,13 +15,11 @@ class JdSpider(scrapy.Spider):
     )
 
     def parse(self, response):
-        # item_list = []
         for category_selector in response.css(".mainNavs .menu_box"):
             category = category_selector.css(".menu_main h2").extract()[0]
             m = re.search("<h2>(.+?)<span></span></h2>", category)
             if m:
                 current_category_text = m.group(1).strip()
-                # print current_category_text
                 for sub_category_selector in category_selector.css(".menu_sub dl.reset"):
                     c = sub_category_selector.css("dt a").extract()[0]
                     c = re.sub('\r\n', '', c)
@@ -31,7 +29,6 @@ class JdSpider(scrapy.Spider):
                     m = re.search("""<ahref="(.+?)">(.+?)</a>""", c)
                     if m:
                         current_sub_category_text = m.group(2).strip()
-                        # print current_sub_category_text
                         for keywords_selector in sub_category_selector.css("dd a"):
                             k = keywords_selector.extract()
                             # 这里class前面的空格必须要有
@@ -40,13 +37,6 @@ class JdSpider(scrapy.Spider):
                             if m:
                                 current_keywords = m.group(2).strip()
                                 current_keywords_link = m.group(1).strip()
-                                # print current_keywords
-                                # item = LagouItem()
-                                # item['category'] = current_category_text
-                                # item['sub_category'] = current_sub_category_text
-                                # item['keywords'] = current_keywords
-                                # item['keywords_link'] = current_keywords_link
-                                # item_list.append(item)
                                 yield Request(current_keywords_link,
                                               meta={
                                                   'category': current_category_text,
