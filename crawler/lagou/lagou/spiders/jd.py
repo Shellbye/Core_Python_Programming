@@ -36,15 +36,22 @@ class JdSpider(scrapy.Spider):
                             m = re.search("""<a href="(.+?)">(.+?)</a>""", k)
                             if m:
                                 current_keywords = m.group(2).strip()
-                                current_keywords_link = m.group(1).strip()
-                                yield Request(current_keywords_link,
-                                              meta={
-                                                  'category': current_category_text,
-                                                  'sub_category': current_sub_category_text,
-                                                  'keywords': current_keywords,
-                                                  'keywords_link': current_keywords_link
-                                              },
-                                              callback=self.parse_2)
+                                for page in range(1, 30):
+                                    current_keywords_link = u"http://www.lagou.com/jobs/list_" \
+                                                            + current_keywords + u"?kd=" \
+                                                            + current_keywords + u"&spc=1&pl=&gj=&xl=&yx=&gx=&st=" \
+                                                                                 u"&labelWords=label%2Clabel&lc=" \
+                                                                                 u"&workAddress=&city=全国&requestId=" \
+                                                                                 u"&pn=" \
+                                                            + unicode(page)
+                                    yield Request(current_keywords_link,
+                                                  meta={
+                                                      'category': current_category_text,
+                                                      'sub_category': current_sub_category_text,
+                                                      'keywords': current_keywords,
+                                                      'keywords_link': current_keywords_link
+                                                  },
+                                                  callback=self.parse_2)
                             else:
                                 continue
                     else:
