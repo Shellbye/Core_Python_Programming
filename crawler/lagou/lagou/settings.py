@@ -5,7 +5,7 @@
 # For simplicity, this file contains only the most important settings by
 # default. All the other settings are documented here:
 #
-#     http://doc.scrapy.org/en/latest/topics/settings.html
+# http://doc.scrapy.org/en/latest/topics/settings.html
 #
 
 BOT_NAME = 'lagou'
@@ -33,3 +33,9 @@ MEMUSAGE_LIMIT_MB = 0
 # did not work exceptions.AttributeError: 'dict' object has no attribute 'fields'
 
 COOKIES_ENABLES = False
+
+#取消默认的user agent,使用新的user agent
+DOWNLOADER_MIDDLEWARES = {
+    'scrapy.contrib.downloadermiddleware.useragent.UserAgentMiddleware': None,
+    'lagou.rotate_useragent.RotateUserAgentMiddleware': 400
+}
