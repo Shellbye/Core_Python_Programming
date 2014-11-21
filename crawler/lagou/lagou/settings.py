@@ -31,3 +31,5 @@ MEMUSAGE_LIMIT_MB = 0
 # FEED_URI = "file:///home/shellbye/scrapy.json"
 # FEED_FORMAT = "json"
 # did not work exceptions.AttributeError: 'dict' object has no attribute 'fields'
+
+COOKIES_ENABLES = False
