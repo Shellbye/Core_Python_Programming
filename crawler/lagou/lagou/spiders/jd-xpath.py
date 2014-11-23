@@ -23,7 +23,7 @@ class JdSpider(scrapy.Spider):
                     current_sub_category_text = current_sub_category_xpath.xpath("descendant::dt//a/text()").extract()[0].strip()
                     for current_keyword_xpath in current_sub_category_xpath.xpath("descendant::dd//a"):
                         current_keyword_text = current_keyword_xpath.xpath("descendant::text()").extract()[0]
-                        for page in range(1, 2):
+                        for page in range(1, 30):
                             current_keywords_link = u"http://www.lagou.com/jobs/list_" \
                                                     + current_keyword_text + u"?kd=" \
                                                     + current_keyword_text + u"&spc=1&pl=&gj=&xl=&yx=&gx=&st=" \
