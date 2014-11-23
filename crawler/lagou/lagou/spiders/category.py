@@ -12,15 +12,23 @@ class CategorySpider(scrapy.Spider):
         'http://www.lagou.com/',
     )
 
+    # def parse(self, response):
+    #     item_list = []
+    #     for a in response.css(".menu_box .menu_main h2"):
+    #         log.msg("This is a warning", level=log.ERROR)
+    #         item = CategoryItem()
+    #         c = a.extract()
+    #         m = re.search("<h2>(.+?)<span></span></h2>", c)
+    #         if m:
+    #             item['category'] = m.group(1).strip()
+    #         item_list.append(item)
+    #         # print a.extract()
+    #     return item_list
+
     def parse(self, response):
         item_list = []
-        for a in response.css(".menu_box .menu_main h2"):
-            log.msg("This is a warning", level=log.ERROR)
+        for a in response.xpath("//div[@class='menu_main']//h2/text()"):
             item = CategoryItem()
-            c = a.extract()
-            m = re.search("<h2>(.+?)<span></span></h2>", c)
-            if m:
-                item['category'] = m.group(1).strip()
+            item['category'] = a.extract()
             item_list.append(item)
-            # print a.extract()
         return item_list
