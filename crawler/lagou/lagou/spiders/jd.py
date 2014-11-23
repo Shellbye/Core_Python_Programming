@@ -16,6 +16,11 @@ class JdSpider(scrapy.Spider):
     )
 
     def parse(self, response):
+        """run <pre>$ scrapy check </pre> to check
+        @url http://www.lagou.com/
+        @returns item 0 0
+        @returns requests 7000
+        """
         for category_selector in response.css(".mainNavs .menu_box"):
             category = category_selector.css(".menu_main h2").extract()[0]
             m = re.search("<h2>(.+?)<span></span></h2>", category)

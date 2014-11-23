@@ -16,6 +16,11 @@ class JdSpider(scrapy.Spider):
     )
 
     def parse(self, response):
+        """run <pre>$ scrapy check </pre> to check
+        @url http://www.lagou.com/
+        @returns item 0 0
+        @returns requests 7000
+        """
         for box in response.xpath("//div[@class='menu_box']"):
             for current_category_path in box.xpath("descendant::div[@class='menu_main']"):
                 current_category_text = current_category_path.xpath("descendant::h2/text()").extract()[0]
