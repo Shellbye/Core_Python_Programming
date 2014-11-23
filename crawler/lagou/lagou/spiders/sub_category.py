@@ -12,6 +12,12 @@ class SubCategorySpider(scrapy.Spider):
     )
 
     def parse(self, response):
+        """run <pre>$ scrapy check </pre> to check
+        @url http://www.lagou.com/
+        @returns item 30 100
+        @returns requests 0 0
+        @scrapes link text
+        """
         item_list = []
         for a in response.css("#sidebar div.mainNavs div.menu_box div.menu_sub dl.reset dt a"):
             item = SubCategoryItem()
