@@ -6,7 +6,7 @@ from ..items import *
 
 
 class Jdv2Spider(CrawlSpider):
-    name = "jdv2"
+    name = "linkextrator"
     allowed_domains = ["lagou.com"]
     start_urls = (
         'http://www.lagou.com/zhaopin/Java?labelWords=label',
