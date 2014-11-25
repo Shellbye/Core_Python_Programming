@@ -39,3 +39,7 @@ DOWNLOADER_MIDDLEWARES = {
     'scrapy.contrib.downloadermiddleware.useragent.UserAgentMiddleware': None,
     'lagou.rotate_useragent.RotateUserAgentMiddleware': 400
 }
+
+CONCURRENT_REQUESTS = 100
+
+RETRY_ENABLED = False
