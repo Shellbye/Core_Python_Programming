@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-import urlparse
 import scrapy
 from ..items import MyImageItem
 
@@ -15,7 +14,8 @@ class CategorySpider(scrapy.Spider):
         item_list = []
         for a in response.xpath("//img"):
             item = MyImageItem()
-            # I'm not clear why the url should be put in []
-            item['image_urls'] = [urlparse.urljoin("http://www.douban.com", a.xpath("@src").extract()[0])]
+            # image_urls is not a single image url but multi of them
+            # notice that the image url need to be full path
+            item['image_urls'] = [a.xpath("@src").extract()[0]]
             item_list.append(item)
         return item_list
