@@ -31,3 +31,8 @@ class SubCategoryItem(scrapy.Item):
 class KeywordsItem(scrapy.Item):
     link = scrapy.Field()
     text = scrapy.Field()
+
+
+class MyImageItem(scrapy.Item):
+    image_urls = scrapy.Field()
+    images = scrapy.Field()

@@ -17,6 +17,7 @@ NEWSPIDER_MODULE = 'lagou.spiders'
 #USER_AGENT = 'lagou (+http://www.yourdomain.com)'
 ITEM_PIPELINES = {
     'scrapy_mongodb.MongoDBPipeline': 300,
+    'scrapy.contrib.pipeline.images.ImagesPipeline': 1,
 }
 
 MONGODB_URI = 'mongodb://localhost:27017'
@@ -43,3 +44,10 @@ DOWNLOADER_MIDDLEWARES = {
 CONCURRENT_REQUESTS = 100
 
 RETRY_ENABLED = False
+
+IMAGES_STORE = '/home/shellbye/Pictures'
+
+IMAGES_THUMBS = {
+    'small': (50, 50),
+    'big': (270, 270),
+}
