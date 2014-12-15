@@ -16,9 +16,10 @@ NEWSPIDER_MODULE = 'lagou.spiders'
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 #USER_AGENT = 'lagou (+http://www.yourdomain.com)'
 ITEM_PIPELINES = {
-    'scrapy_mongodb.MongoDBPipeline': 300,
+    # 'scrapy_mongodb.MongoDBPipeline': 300,
     'lagou.pipelines.JsonExportPipeline': 2,
-    'scrapy.contrib.pipeline.images.ImagesPipeline': 1,
+    'lagou.scrapy_mysql.MySQLPipeline': 5,
+    # 'scrapy.contrib.pipeline.images.ImagesPipeline': 1,
 }
 
 MONGODB_URI = 'mongodb://localhost:27017'
