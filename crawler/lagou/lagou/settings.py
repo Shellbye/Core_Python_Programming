@@ -17,8 +17,9 @@ NEWSPIDER_MODULE = 'lagou.spiders'
 #USER_AGENT = 'lagou (+http://www.yourdomain.com)'
 ITEM_PIPELINES = {
     # 'scrapy_mongodb.MongoDBPipeline': 300,
-    'lagou.pipelines.JsonExportPipeline': 2,
-    'lagou.scrapy_mysql.MySQLPipeline': 5,
+    # 'lagou.pipelines.JsonExportPipeline': 2,
+    # 'lagou.scrapy_mysql.MySQLPipeline': 5,
+    'lagou.scrapy_mongodb_simplified.MongoDBPipelineSimplified': 55,
     # 'scrapy.contrib.pipeline.images.ImagesPipeline': 1,
 }
 
