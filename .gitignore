@@ -39,7 +39,4 @@ nosetests.xml
 .svn/
 log_info.txt
 log/
-lovep2c.sqlite
-static/media/images/avatar/*_avatar/*
-static/media/images/company_pic/
-static/media/images/contract_pic/
+*.log
